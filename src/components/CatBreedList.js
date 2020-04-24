@@ -1,25 +1,43 @@
-import React from "react";
+import React, { Fragment } from "react";
+
+import { Link } from 'react-router-dom';
+
 import Axios from "axios";
 
 export default class CatBreedList extends React.Component {
-    state = {
-        catBreeds: []
+  
+  constructor(props) {
+        super(props);
+        this.state = {
+        catBreeds: [],
     }
+  }
 
-componentDidMount() {
-    Axios.get('https://api.thecatapi.com/v1/breeds')
+componentDidMount() {  
+  Axios.get('https://api.thecatapi.com/v1/breeds')
     .then(res => {
         console.log(res);
-        this.setState({ catBreeds: res.data });
+        this.setState({ 
+            catBreeds: res.data
+             });
     })
 }
 render() {
-    return (
-        <ul>{this.state.catBreeds.map(catBreed => 
-        <div>
-        <li className="catBreedName" key={catBreed.name}>{catBreed.name} cats are ... {catBreed.temperament}</li>
-        <hr/>
-        </div>)}
-    </ul>
-    )}
-}
+  return (
+        <Fragment>
+        A long list of cat breeds:
+        <ul>
+          {this.state.catBreeds.map(catBreed => {
+            return (
+                <Link to={catBreed.id}>
+              <li key={catBreed.id} className={catBreed.id}>
+                {catBreed.name}
+              </li>
+              </Link>
+            )
+          })}
+        </ul>
+      </Fragment>
+      )
+    }
+  }
