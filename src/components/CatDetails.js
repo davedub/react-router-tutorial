@@ -19,7 +19,6 @@ function CatDetails({ match }) {
               },
               )
             const items = await fetchItem.json()
-            setItems(items)
             console.log(items)
     }
     return (
