@@ -3,15 +3,14 @@ import Axios from 'axios'
 
 function CatDetails({ match }) {
     useEffect((props) => {
-        fetchItem(match.params.id)
+        fetchItem()
         console.log(match)
     })
-
     const [item] = useState({})
 
     const fetchItem = async () => {
         const fetchItem = await Axios.get(
-            `https://api.thecatapi.com/v1/breeds/search?q=${match.params.id}`,
+            `https://api.thecatapi.com/v1/breeds/search?q=beng`,
             {
                 mode: 'cors',
                 headers: {
