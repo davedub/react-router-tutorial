@@ -5,7 +5,7 @@ function CatDetails({ match }) {
       fetchItem()
       console.log(match)
     })
-    const [items] = useState({})
+    const [setItems] = useState({})
 
     const fetchItem = async () => {
         const fetchItem = await fetch(
@@ -19,6 +19,7 @@ function CatDetails({ match }) {
               },
               )
             const items = await fetchItem.json()
+            setItems(items)
             console.log(items)
     }
     return (
