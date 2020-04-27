@@ -4,13 +4,13 @@ import axios from 'axios';
 axios.defaults.baseURL = 'https://api.thedogapi.com/v1';
 axios.defaults.headers.common['x-api-key'] = '54415849-f1f8-41e0-9024-a766ad625326';
 
-class App extends Component {
+class DogDetails extends Component {
 
   async getBreeds() {
       const res = await axios('/breeds');
       return res.data;
   }
-  async getCatsImagesByBreed(breed_id, amount) {
+  async getDogsImagesByBreed(breed_id, amount) {
       const res = await axios('/images/search?breed_ids='+breed_id + "&limit="+ amount);
       
       console.table(res.data)
@@ -20,7 +20,7 @@ class App extends Component {
   async loadBreedImages() {
     console.log('Load Breed Images:', this.state.selected_breed)
 
-    let breed_images = await this.getCatsImagesByBreed(this.state.selected_breed, 5)
+    let breed_images = await this.getDogsImagesByBreed(this.state.selected_breed, 5)
 
     this.setState({ images: breed_images });
   }
@@ -72,4 +72,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default DogDetails;

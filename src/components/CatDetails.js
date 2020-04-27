@@ -5,7 +5,9 @@ function CatDetails({ match }) {
       fetchItem()
       console.log(match)
     })
-    const [items, setItem] = useState({})
+    // const setItem = useState({})
+    const catDetails = useState([])
+    catDetails.props = []
 
     const fetchItem = async () => {
         const fetchItem = await fetch(
@@ -20,11 +22,28 @@ function CatDetails({ match }) {
               )
             const items = await fetchItem.json()
             console.log(items)
-    }
+            function arrayToObject(arr) {
+              var obj = {};
+              for (var i = 0; i < arr.length; ++i){
+              obj[i] = arr[i];
+              }
+              return obj;
+          }
+          const catDetails = arrayToObject(items)
+          console.log(catDetails)
+          console.log(typeof catDetails)
+          for (let keys in catDetails) {
+            console.log(catDetails[keys]);
+          }
+          const catID = Object.keys(catDetails)
+          console.log(catID)
+        }
     return (
-        <p key={items.id}>{items.name}
-        The cat in question.</p>
-        )
-      }
+      Object.entries(catDetails).map(([key,value])=>{
+        return (
+          <div className={key}>Value: {value}</div>
+        )}
+      ))
+  }
 
 export default CatDetails
