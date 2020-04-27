@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 
 import CatDetails from './components/CatDetails'
+import DogDetails from './components/DogDetails'
 import Navbar from './components/navbar'
 import Birds from './pages/birds'
 import Cats from './pages/cats'
@@ -24,6 +25,7 @@ function App() {
                     <Route path="/dogs" exact component={Dogs} />
                     <Route path="/monkeys" exact component={Monkeys} />
                     <Route path="/cats/:id" exact component={CatDetails} />
+                    <Route path="/dogs/:id" exact component={DogDetails} />
                 </Switch>
             </Router>
         </div>

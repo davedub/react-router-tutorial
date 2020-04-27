@@ -5,7 +5,7 @@ function CatDetails({ match }) {
       fetchItem()
       console.log(match)
     })
-    const [setItems] = useState({})
+    const [items, setItem] = useState({})
 
     const fetchItem = async () => {
         const fetchItem = await fetch(
@@ -22,9 +22,9 @@ function CatDetails({ match }) {
             console.log(items)
     }
     return (
-        <div>
-            <h2>Cat Item</h2>
-        </div>
-    )
-}
+        <p key={items.id}>{items.name}
+        The cat in question.</p>
+        )
+      }
+
 export default CatDetails
