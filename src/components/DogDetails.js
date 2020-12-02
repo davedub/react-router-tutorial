@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://api.thedogapi.com/v1';
-axios.defaults.headers.common['x-api-key'] = '54415849-f1f8-41e0-9024-a766ad625326';
+
+const dogInstance = axios.create({
+  baseURL: 'https://api.thedogapi.com/v1',
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'dogbar'}
+})
+
+dogInstance.defaults.headers.common['x-api-key'] = '54415849-f1f8-41e0-9024-a766ad625326';
 
 class DogDetails extends Component {
 
   async getBreeds() {
-      const res = await axios('/breeds');
+      const res = await dogInstance('/breeds');
       return res.data;
   }
   async getDogsImagesByBreed(breed_id, amount) {
-      const res = await axios('/images/search?breed_ids='+breed_id + "&limit="+ amount);
+      const res = await dogInstance('/images/search?breed_ids='+breed_id + "&limit="+ amount);
       
       console.table(res.data)
       return res.data;
